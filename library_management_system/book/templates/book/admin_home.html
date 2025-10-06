@@ -1,0 +1,51 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="admin-dashboard">
+
+  <!-- Page title -->
+  <h1 class="dashboard-title">📚 Library Admin Dashboard</h1>
+
+  <!-- Quick stats section -->
+  <div class="dashboard-stats">
+    <div class="card">
+      <h2>Total Books</h2>
+      <p>1,240</p>
+    </div>
+    <div class="card">
+      <h2>Registered Users</h2>
+      <p>310</p>
+    </div>
+    <div class="card">
+      <h2>Books Borrowed</h2>
+      <p>86</p>
+    </div>
+    <div class="card">
+      <h2>Pending Returns</h2>
+      <p>12</p>
+    </div>
+  </div>
+
+  <!-- Management options -->
+  <div class="dashboard-actions">
+    <h2>Management</h2>
+    <div class="action-buttons">
+      <a href="#" class="btn">Manage Books</a>
+      <a href="#" class="btn">Manage Users</a>
+      <a href="#" class="btn">Borrow Records</a>
+      <a href="#" class="btn">Return Records</a>
+    </div>
+  </div>
+
+  <!-- Recent activity -->
+  <div class="recent-activity">
+    <h2>Recent Activity</h2>
+    <ul>
+      <li><strong>John Doe</strong> borrowed <em>“Introduction to AI”</em></li>
+      <li><strong>Mary Ann</strong> returned <em>“Python for Beginners”</em></li>
+      <li><strong>Admin</strong> added new book <em>“Machine Learning 101”</em></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
