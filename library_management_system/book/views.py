@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Book, Transaction
 from django.contrib.auth.models import User
+from .forms import BookForm, TransactionForm
+from django.utils import timezone
 # Create your views here.
 
 # This is the registration view.
@@ -94,3 +96,44 @@ class CustomLoginView(LoginView):
         if user.is_staff:
             return reverse('admin_home')
         return reverse('user_home')
+    
+
+# This view is reponsible for handling the management of books. It allows admins to register new books in the 
+# database.
+def manage_books(request):
+    if request.method == 'POST':
+        book_form = BookForm(request.POST)
+        if book_form.is_valid():
+            book_form.save()
+            book_name = book_form.cleaned_data.get('title')
+            messages.success(request, f"{book_name} has been saved successfully!")
+            return redirect('manage_books')
+    else:
+        book_form = BookForm()
+
+    return render(request, 'book/manage_books.html', {'form': book_form})
+
+# This view also manages users. It allow admins to register new users in the database.
+def manage_users(request):
+
+    return render(request, 'book/manage_users.html')
+
+# This view handles the history of books borrowed in the library whether returned or not.
+def borrow_records(request):
+    if request.method == "POST":
+        transaction_form = TransactionForm(request.POST)
+        if transaction_form.is_valid():
+            transaction = transaction_form.save(commit=False)
+            user = request.user
+            transaction.time_of_transaction = timezone.now()
+            transaction.save()
+            book = transaction_form.cleaned_data.get('book')
+            messages.success(request, f"{book} has been successfully been borrowed by {user}!")
+            return redirect('borrow_records')
+        else:
+            messages.error(request, "There was an error processing your form.")
+
+    else:
+            transaction_form = TransactionForm()
+
+    return render(request, 'book/borrow_records.html', {'form': transaction_form })
