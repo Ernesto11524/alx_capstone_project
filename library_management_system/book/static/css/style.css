@@ -1,0 +1,194 @@
+/* === General Styles === */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* === Navbar === */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #003366;
+    padding: 15px 40px;
+    color: white;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffd700;
+}
+
+/* === Main Content === */
+main {
+    padding: 50px;
+    min-height: 80vh;
+}
+
+/* === Footer === */
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* === Forms === */
+.form-container {
+    background: white;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #003366;
+}
+
+form p {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1rem;
+}
+
+input:focus {
+    border-color: #003366;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0055cc;
+}
+
+.switch-text {
+    text-align: center;
+    margin-top: 20px;
+}
+.switch-text a {
+    color: #003366;
+    text-decoration: none;
+    font-weight: 500;
+}
+.switch-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* === Messages === */
+.messages {
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+
+/* Message container */
+.messages {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Base message style */
+.messages .message {
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+/* Message types */
+.messages .success {
+  background-color: #4caf50;  /* green */
+}
+
+.messages .error {
+  background-color: #f44336;  /* red */
+}
+
+.messages .warning {
+  background-color: #ff9800;  /* orange */
+}
+
+.messages .info {
+  background-color: #2196f3;  /* blue */
+}
+
+/* Simple fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
