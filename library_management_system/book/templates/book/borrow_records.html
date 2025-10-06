@@ -1,0 +1,20 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+<div class="borrow-records-container">
+  <h2 class="page-title">📘 Record a Borrow Transaction</h2>
+
+  <div class="actions">
+    <a href="#" class="btn btn-view">View All Transactions</a>
+  </div>
+
+  <div class="transaction-form-section">
+    <form action="#" method="POST" class="transaction-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <button type="submit" class="btn-submit">Submit Transaction</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

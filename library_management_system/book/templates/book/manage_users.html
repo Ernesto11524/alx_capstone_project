@@ -1,0 +1,15 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+<div class="manage-users-container">
+  <h2 class="page-title">👥 Manage Users</h2>
+
+  <div class="actions">
+    <a href="#" class="btn btn-view">View All Users</a>
+  </div>
+
+  <div class="user-form-section">
+    <button><a href="{% url 'register' %}"><h3>Register a New User</h3></a></button>
+  </div>
+</div>
+{% endblock %}

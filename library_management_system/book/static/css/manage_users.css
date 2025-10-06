@@ -1,0 +1,93 @@
+/* ====== General Container ====== */
+.manage-users-container {
+  max-width: 800px;
+  margin: 60px auto;
+  background: #f9fafc;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* ====== Page Title ====== */
+.page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* ====== Action Buttons ====== */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* ====== View Button ====== */
+.btn-view {
+  background: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-view:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* ====== User Form Section ====== */
+.user-form-section {
+  margin-top: 30px;
+}
+
+.user-form-section button {
+  background: #28a745;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.user-form-section button:hover {
+  background: #218838;
+  transform: scale(1.03);
+}
+
+.user-form-section a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.user-form-section h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 600px) {
+  .manage-users-container {
+    padding: 25px;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .btn, .user-form-section button {
+    width: 100%;
+  }
+}

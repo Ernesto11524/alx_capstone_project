@@ -1,0 +1,20 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+<div class="manage-books-container">
+  <h2 class="page-title">📚 Manage Books</h2>
+
+  <div class="actions">
+    <a href="#" class="btn btn-view">View All Books</a>
+  </div>
+
+  <div class="book-form-section">
+    <h3>Register a New Book</h3>
+    <form method="POST" class="book-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-submit">Save Book</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

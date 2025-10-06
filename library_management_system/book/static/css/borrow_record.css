@@ -1,0 +1,116 @@
+/* ====== Container ====== */
+.borrow-records-container {
+  max-width: 850px;
+  margin: 60px auto;
+  background: #fdfdfd;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* ====== Title ====== */
+.page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+/* ====== Buttons ====== */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* ====== View Transactions Button ====== */
+.btn-view {
+  background: #f39c12;
+  color: #fff;
+  border: none;
+}
+
+.btn-view:hover {
+  background: #d68910;
+  transform: translateY(-2px);
+}
+
+/* ====== Form Section ====== */
+.transaction-form-section {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.transaction-form label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.transaction-form input,
+.transaction-form select,
+.transaction-form textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.transaction-form input:focus,
+.transaction-form select:focus,
+.transaction-form textarea:focus {
+  outline: none;
+  border-color: #27ae60;
+}
+
+/* ====== Submit Button ====== */
+.btn-submit {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+  background: #219150;
+  transform: translateY(-2px);
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 600px) {
+  .borrow-records-container {
+    padding: 25px;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .btn, .btn-submit {
+    width: 100%;
+  }
+}
