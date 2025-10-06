@@ -26,7 +26,7 @@ class Transaction(models.Model):
     borrow_duration = models.DurationField(default=datetime.timedelta(days=14))
     check_out = models.BooleanField(default=True)
     time_of_return = models.DateTimeField(blank=True, null=True)
-    returned = models.BooleanField()
+    returned = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.book} is borrowed by {self.user}"
