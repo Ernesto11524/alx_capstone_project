@@ -16,6 +16,7 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title} by {self.author}"
     
+    
 
 # This model is reposible for handling transactions made by users.
 class Transaction(models.Model):
@@ -24,7 +25,7 @@ class Transaction(models.Model):
     time_of_transaction = models.DateTimeField()
     borrow_duration = models.DurationField(default=datetime.timedelta(days=14))
     check_out = models.BooleanField(default=True)
-    time_of_return = models.DateTimeField()
+    time_of_return = models.DateTimeField(blank=True, null=True)
     returned = models.BooleanField()
 
     def __str__(self):
