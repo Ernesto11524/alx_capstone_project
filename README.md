@@ -1,46 +1,71 @@
-# alx_capstone_project
+# library_management_system
 
-# Student Management System (Django)
+# Library Management System (Django)
 
-This project is a **Student Management System** built with Django and Django Rest Framework. The goal is to manage students, staff and academic details in a structured way while learning Django concepts step by step.
+This project is a **Library Management System** built using Django and Django Rest Framework.  
+It is designed to manage library resources, handle book borrowing activities, and organize user access for both administrators and regular users.  
+The project also serves as a practical learning experience for understanding Django’s authentication system, models, views, and templates.
 
-- - -
+---
 
 ## Features Implemented So Far
 
-- **Custom User Model**
-    Extended the default Django `AbstractUser` to add fields like `other_names`, `date_of_birth`, `gender` and `role` for different types of users (Admin, Student, Teacher).
+- **User Authentication**
+    - Uses Django’s built-in authentication system for login, logout, and registration.
+    - Two types of users:
+        - **Admin Users** – can manage books, view borrowing records, and oversee the system.
+        - **Normal Users** – can view available books, borrow books, and view their borrowing history.
+    - Custom login and registration pages integrated with Django messages for user feedback.
 
-- **Student Model**
-    - Linked to the custom user with a `OneToOneField`.
-    - Include details like:
-        - Guardian information
-        - Program of study
-        - Year/classroom assignment
-    - Auto-generates a unique **Student ID** in the format:
-    ```
-    STU-<current_year>-<number>
-    ```
+- **Book Management**
+    - Admins can add, update, or delete books from the system.
+    - Each book record includes:
+        - Title  
+        - Author  
+        - ISBN  
+        - Publication date  
+        - Availability status  
+    - Books are displayed dynamically on both admin and user dashboards.
 
-- **Programs & Classroom Models**
-    - `Programs` model to store courses of study.
-    - `Classroom` model to represent year levels or classes.
-    - Both linked to students with `ForeignKey` relationships.
+- **Borrowing System**
+    - Normal users can borrow available books.
+    - Borrowed books are linked to the user who borrowed them.
+    - Each borrowing record includes:
+        - Borrow date  
+        - Return due date  
+        - Returned status (Yes/No)
+    - Automatic checks ensure that unavailable books cannot be borrowed again until returned.
 
-- **Teacher Model**
-    - Linked to custom user with a `OneToOneField`.
-    - Includes details like:
-        - Teacher's personal information like phone_number.
-        - The subject the teacher teaches.
-    - Auto-generated a unique **Teacher ID** in the format:
-    ```
-    TCH-<current_year>-<number>
-    ```
+- **Admin Dashboard**
+    - Displays system statistics such as:
+        - Total number of books  
+        - Books currently borrowed  
+        - Active users  
+        - Recently added books
+    - Provides quick access to manage library items and monitor borrowing activity.
 
-- **Subject Model**
-    - The subject model contains the subjects taught in the school and each teacher is assigned one.
-    - Linked to the teacher's model.
+- **User Dashboard**
+    - Displays:
+        - List of books available for borrowing  
+        - User’s borrowing history  
+        - Notifications about borrowed or overdue books
+    - Clean and responsive design for better user experience.
 
-- **Admin Panel Customization**
-    - Registered models in the admin panel.
-    - Customized the displayed fields for better readability.
+- **Frontend Integration**
+    - Uses Django templates and static files for UI rendering.
+    - Includes consistent base layout with navigation and message display.
+    - CSS designed for clear visual separation between admin and user interfaces.
+
+- **Logout Functionality**
+    - Implemented using Django’s built-in `LogoutView`.
+    - Clears user sessions and redirects to the login page with a logout success message.
+
+---
+
+## Future Enhancements
+
+- Add book search and filtering by title, author, or category.  
+- Implement overdue book notifications via email.  
+- Add REST API endpoints for mobile or external access.  
+- Enable book reservations and renewal requests.  
+- Include user profile management with borrowing limits and history tracking.
