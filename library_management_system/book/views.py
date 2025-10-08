@@ -5,10 +5,15 @@ from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .models import Book, Transaction
 from django.contrib.auth.models import User
 from .forms import BookForm, TransactionForm
 from django.utils import timezone
+from rest_framework import generics
+from django.contrib.auth.mixins import UserPassesTestMixin
+from .serializers import BookSerializer, TransactionSerializer
+from .permission import StaffOnlyMixin
 # Create your views here.
 
 # This is the registration view.
@@ -29,6 +34,7 @@ def register(request):
 
 # This is the home view for admin users.
 @login_required
+@staff_member_required
 def admin_home(request):
     # This queries all the books in the database.
     total_books = Book.objects.all() 
@@ -100,6 +106,7 @@ class CustomLoginView(LoginView):
 
 # This view is reponsible for handling the management of books. It allows admins to register new books in the 
 # database.
+@staff_member_required
 def manage_books(request):
     if request.method == 'POST':
         book_form = BookForm(request.POST)
@@ -114,11 +121,13 @@ def manage_books(request):
     return render(request, 'book/manage_books.html', {'form': book_form})
 
 # This view also manages users. It allow admins to register new users in the database.
+@staff_member_required
 def manage_users(request):
 
     return render(request, 'book/manage_users.html')
 
 # This view handles the history of books borrowed in the library whether returned or not.
+@staff_member_required
 def borrow_records(request):
     if request.method == "POST":
         transaction_form = TransactionForm(request.POST)
@@ -137,3 +146,28 @@ def borrow_records(request):
             transaction_form = TransactionForm()
 
     return render(request, 'book/borrow_records.html', {'form': transaction_form })
+
+
+class ListBooks(generics.ListAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+class CreateBooks(StaffOnlyMixin, generics.CreateAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+class RetrieveBooks(generics.RetrieveAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+class UpdateBooks(StaffOnlyMixin, generics.UpdateAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+class DeleteBooks(StaffOnlyMixin, generics.DestroyAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
