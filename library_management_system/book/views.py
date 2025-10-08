@@ -10,8 +10,8 @@ from .models import Book, Transaction
 from django.contrib.auth.models import User
 from .forms import BookForm, TransactionForm
 from django.utils import timezone
-from rest_framework import generics
-from django.contrib.auth.mixins import UserPassesTestMixin
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import BookSerializer, TransactionSerializer
 from .permission import StaffOnlyMixin
 # Create your views here.
@@ -151,6 +151,11 @@ def borrow_records(request):
 class ListBooks(generics.ListAPIView):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+
+    filterset_fields =['title', 'author', 'ISBN']
+    search_fields = ['title', 'author', 'ISBN']
+    ordering_fields = ['title', 'published_date']
 
 class CreateBooks(StaffOnlyMixin, generics.CreateAPIView):
     serializer_class = BookSerializer
