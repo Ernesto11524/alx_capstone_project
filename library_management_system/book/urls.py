@@ -15,5 +15,6 @@ urlpatterns = [
     path('api/retrieve/<int:pk>/', book_views.RetrieveBooks.as_view(), name='retrieve_books'),
     path('api/delete/<int:pk>/', book_views.DeleteBooks.as_view(), name='delete_books'),
     path('api/update/<int:pk>/', book_views.UpdateBooks.as_view(), name='update_books'),
-
+    path('checkout/', book_views.CheckOut.as_view(), name='checkout'),
+    path('return/', book_views.ReturnedBooks, name='return'),
 ]
