@@ -8,12 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Book, Transaction
 from django.contrib.auth.models import User
-from .forms import BookForm, TransactionForm
+from .forms import BookForm, TransactionForm, ReturnForm
 from django.utils import timezone
 from rest_framework import generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import BookSerializer, TransactionSerializer
 from .permission import StaffOnlyMixin
+import datetime
 # Create your views here.
 
 # This is the registration view.
@@ -147,7 +148,7 @@ def borrow_records(request):
 
     return render(request, 'book/borrow_records.html', {'form': transaction_form })
 
-
+# This is an api endpoint to list all books.
 class ListBooks(generics.ListAPIView):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
@@ -157,18 +158,22 @@ class ListBooks(generics.ListAPIView):
     search_fields = ['title', 'author', 'ISBN']
     ordering_fields = ['title', 'published_date']
 
+# This is an api endpoint to create new books. This can only be accessed by the staff members.
 class CreateBooks(StaffOnlyMixin, generics.CreateAPIView):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
 
+# This is an api endpoint to retrieve a single book.
 class RetrieveBooks(generics.RetrieveAPIView):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
 
+# This is an api endpoint to update an existing book. This can only be accessed by staff members.
 class UpdateBooks(StaffOnlyMixin, generics.UpdateAPIView):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
 
+# This is an api endpoint to delete a book. This can only be accesses by staff members.
 class DeleteBooks(StaffOnlyMixin, generics.DestroyAPIView):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
@@ -176,3 +181,36 @@ class DeleteBooks(StaffOnlyMixin, generics.DestroyAPIView):
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
+
+# This is an api endpoint to create a book transaction.
+class CheckOut(generics.CreateAPIView):
+    serializer_class = TransactionSerializer
+    queryset = Transaction.objects.all()
+
+    # This method reduces the available copies of the book that was just borrowed.
+    def perform_create(self, serializer):
+        transaction = serializer.save()
+        book = transaction.book
+        book.number_of_copies_available -= 1
+        book.save()
+        return super().perform_create(serializer)
+
+# This method is to indicate that the borrowed book is returned.
+def ReturnedBooks(request):
+    if request.method == 'POST':
+        form = ReturnForm(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data.get('user')
+            book = form.cleaned_data.get('book')
+            transaction = Transaction.objects.get(user = user, book = book)
+            transaction.returned = True
+            transaction.time_of_return = datetime.datetime.now()
+            transaction.save()
+            transaction_book = Book.objects.get(id = transaction.book.id)
+            transaction_book.number_of_copies_available += 1
+            transaction_book.save()
+    
+    else:
+        form = ReturnForm()
+        
+    return render(request, 'book/return.html', {'form': form})
