@@ -27,3 +27,9 @@ class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
         fields = ['user', 'book', 'borrow_duration', 'check_out', 'time_of_return', 'returned']
+
+# This form handles the return of a borrowed book.
+class ReturnForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['user', 'book']
